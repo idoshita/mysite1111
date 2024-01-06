@@ -1,0 +1,81 @@
+{% extends "app/base.html" %} {% load widget_tweaks %} {% block content %}
+
+<div class="card card-auth my-5 mx-auto" >
+    <div class="card-body">
+        <h5 class="card-title text-center">賛助会</h5>
+        <form method="post" class="form-auth h-adr">
+        {% csrf_token %}
+        名前<br>
+        <div class="form-label-group form_wrap form_wrap-2">
+            {% render_field form.first_name class="form-control" placeholder="姓/必須" %}
+            {% render_field form.last_name class="form-control" placeholder="名/必須" %}
+        </div>
+        
+        <div class="form-label-group form_wrap form_wrap-2">
+            {% render_field form.first_kana class="form-control" placeholder="姓カナ/必須" %}
+            {% render_field form.last_kana class="form-control" placeholder="名カナ/必須" %}
+        </div>
+        住所<br>
+        <div class="form-label-group">
+            {% render_field form.post_code class="form-control" placeholder="郵便番号/1231234(ハイフンなし)/必須" %}
+        </div>
+
+        <div class="form-label-group form_wrap form_wrap-2">
+            {% render_field form.state class="form-control" placeholder="都道府県" %}
+            {% render_field form.city class="form-control" placeholder="市町村" %}
+        </div>
+        <div class="form-label-group">
+            {% render_field form.city_block class="form-control" placeholder="丁目、番号/必須" %}
+        </div>
+        <div class="form-label-group">
+            {% render_field form.apartments class="form-control" placeholder="マンション名、部屋番号" %}
+        </div>
+        メール<br>
+        <div class="form-label-group">
+            {% render_field form.email class="form-control" placeholder="メールアドレス/必須" %}
+        </div>
+        電話<br>
+        <div class="form-label-group">
+            {% render_field form.phone class="form-control" placeholder="電話番号/09012345678" %}
+        </div>
+        賛助額<br>
+        <div class="form-label-group">
+            {% render_field form.donation class="form-control" placeholder="賛助額/必須" %}
+        </div>
+        
+        <p><input type="checkbox" id="with-consent" name="with-consent">
+            <label for="with-consent">利用規約に同意する</label>
+        </p>
+
+        <div class="button mx-auto">
+            <button class="btn btn-lg btn-primary btn-block mx-auto" type="submit" disabled id="submit">
+            入力内容確認
+            </button>
+        </div>
+        </form>
+    </div>
+</div>
+
+<!-- チェックボタン用のJavaScript -->
+<script>
+    // "#with-consent"というIDを持つ要素をドキュメントから取得し、consentという定数に保存します
+    const consent = document.querySelector("#with-consent");
+
+    // "#submit"というIDを持つ要素をドキュメントから取得し、buttonという定数に保存します
+    const button = document.querySelector("#submit");
+
+    // consent要素の状態が変化したときに実行されるイベントリスナーを追加します
+    consent.addEventListener('change', () => {
+
+        // consent要素がチェックされているかどうかを確認します
+        if (consent.checked === true) {
+            // チェックが入っていれば、submitボタンを有効化します
+            button.disabled = false;
+        } else {
+            // チェックが入っていなければ、submitボタンを無効化します
+            button.disabled = true;
+        }
+    });
+</script>
+
+{% endblock %}

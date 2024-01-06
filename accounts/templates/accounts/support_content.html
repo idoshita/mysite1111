@@ -1,0 +1,61 @@
+{% extends "app/base.html" %} {% load humanize %} {% block content %}
+
+<div class="card card-profile my-5 mx-auto">
+    <div class="card-body">
+        <h5 class="card-title text-center">プロフィール</h5>
+        <form method="post" class="form-auth h-adr">
+        {% csrf_token %}
+        <table class="profile_table mb-4">
+        <tbody>
+            <tr>
+            <th class="header">名前</th>
+            <td class="data">{{ first_name }}{{ last_name }}
+            </td>
+            </tr>
+            <tr>
+            <th class="header">カナ</th>
+            <td class="data">{{ first_kana }}{{ last_kana }}
+            </td>
+            </tr>
+            <tr>
+            <th class="header">郵便番号</th>
+            <td class="data">{{ post_code }}
+            </td>
+            </tr>
+            <tr>
+            <th class="header">住所</th>
+            <td class="data">{{ state }}{{ city }}{{city_block}}
+            </td>
+            </tr>
+            <tr>
+            <th class="header">マンション名、部屋番号</th>
+            <td class="data">{{ apartments }}
+            </td>
+            </tr>
+            <tr>
+            <th class="header">メールアドレス</th>
+            <td class="data">{{ email }}
+            </td>
+            </tr>
+            <tr>
+            <th class="header">電話番号</th>
+            <td class="data">{{ phone }}
+            </td>
+            </tr>
+            <tr>
+            <th class="header">賛助額</th>
+            <td class="data">{{ donation|intcomma }}
+            </td>
+            </tr>
+        </tbody>
+        </table>
+                <div class="button mx-auto">
+                <button class="btn btn-lg btn-primary btn-block mx-auto" type="submit">
+                支払方法選択へ進む
+                </button>
+            </div>
+            </form>
+    </div>
+</div>
+
+{% endblock %}

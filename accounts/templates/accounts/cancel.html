@@ -1,0 +1,17 @@
+{% extends 'app/base.html' %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row">
+        <div class="col-12">
+        <h1>Cancel</h1>
+        <p>クレジットが、うまく処理されませんでした。<br><br>恐れ入りますが、下記URLをクリックいただき、<br>支払選択画面からやり直しをお願いいたします。</p>
+        </div>
+    </div><br><br><br>
+            <!-- 支払選択ボタン -->
+            <form action="/accounts/cart/{{ id.id }}/" method="POST">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-lg btn-primary btn-block mx-auto">支払方法選択へ進む</button>
+            </form>
+</div>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'app/base.html' %}
+{% load humanize %} 
+{% block content %}
+ 
+<div class="container ">
+    <div class="row my-5">
+        <div class="col-12">
+        <h2>賛助額</h2>
+<h1>{{ id.donation | intcomma }}円</h1>
+<br><br>
+<p>支払方法を選択してください。</p>
+<br>
+        <!-- Checkoutボタン -->
+        <form action="/accounts/checkout/{{ id.id }}/" method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-lg btn-primary">クレジット支払</button>
+        </form>
+<br><br>
+        <form action="/accounts/bank/{{ id.id }}/" method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-lg btn-secondary">銀行振込</button>
+        </form>
+
+
+
+
+        </div>
+    </div>
+</div>
+    
+{% endblock %}

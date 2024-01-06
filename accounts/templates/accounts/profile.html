@@ -1,0 +1,87 @@
+{% extends "app/base.html" %} {% block content %}
+
+<div class="card card-profile my-5 mx-auto" style="width: 90%;">
+    <div class="card-body">
+        <h5 class="card-title text-center">プロフィール</h5>
+        <table border="1">
+        <tr>
+            <td class="header">名前</td>
+            <td class="header">名前カナ</td>
+            <td class="header">郵便番号</td>
+            <td class="header">都道府県</td>
+            <td class="header">住所</td>
+            <td class="header">メール</td>
+            <td class="header">電話番号</td>
+            <td class="header">賛助額</td>
+            <td class="header">支払方法</td>
+            <td class="header">支払確認</td>
+            <td class="header">登録日時</td>
+            <td class="header">発送確認</td>
+
+        </tr>
+        {% for i in user_data %}
+        <tr>
+            <td class="data">
+            {{ i.first_name }} {{ i.last_name }}
+            </td>
+            <td class="data">
+            {{ i.first_kana }} {{ i.last_kana }}
+            </td>
+            <td class="data">
+            {{ i.post_code }}
+            </td>
+            <td class="data">
+            {{ i.state }}
+            </td>
+            <td class="data">
+            {{ i.city }} {{ i.city_block }} {{ i.apartments }}
+            </td>
+            <td class="data">
+            {{ i.email }}
+            </td>
+            <td class="data">
+            {{ i.phone }}
+            </td>
+            <td class="data">
+            {{ i.donation }}
+            </td>
+            <td class="data">
+            {{ i.payment }}
+            </td>
+            <td class="data">
+                {% if i.is_confirmed == False %}
+                <form method="POST" action="{% url 'payment' i.id %}">
+                    {% csrf_token %}
+                    <button class="btn btn-warning" type="submit">未払い</button>
+                </form>
+                {% else %}
+            <font color="blue">決済完了</font>
+            {% endif %}
+
+            </td>
+            <td class="data">
+            {{ i.created }}
+            </td>            
+        </td>
+        <td class="data">
+            {% if i.shipping == None %}
+            <form method="POST" action="{% url 'shipping' i.id %}">
+                {% csrf_token %}
+                <button class="btn btn-danger" type="submit">未発送</button>
+            </form>
+            {% else %}
+            {{ i.shipping }}
+            {% endif %}
+        </td>
+        </td>
+        <td class="data">
+        
+        </td>
+
+        </tr>
+        {% endfor %}
+        </table>
+    </div>
+</div>
+
+{% endblock %}
