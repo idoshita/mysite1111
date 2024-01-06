@@ -25,3 +25,4 @@ tzdata
 ulid-py
 urllib3
 uuid
+python-decouple
