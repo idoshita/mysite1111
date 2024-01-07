@@ -28,3 +28,4 @@ uuid
 python-decouple
 dj_database_url
 django-allauth
+psycopg2-binary
